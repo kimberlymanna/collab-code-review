@@ -1,0 +1,72 @@
+/* ReviewForm.module.css */
+.inputField {
+  @apply w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.textareaField {
+  @apply w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.errorText {
+  @apply text-red-500 text-sm mt-1;
+}
+
+.submitButton {
+  @apply w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition;
+}
+
+.submitButtonDisabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.formContainer {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
+}
+
+.darkForm {
+  background-color: #374151; /* Tailwind gray-700 */
+  color: #f9fafb;
+}
+
+.cancelButton {
+  padding: 0.5rem 1rem;
+  background-color: #9ca3af; /* Tailwind gray-400 */
+  color: white;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.cancelButton:hover {
+  background-color: #6b7280; /* Tailwind gray-500 */
+}
+
+.successText {
+  color: #16a34a; /* green-600 */
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.successBanner {
+  background-color: #16a34a; /* green-600 */
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 1rem;
+  animation: fadeInOut 3s forwards;
+}
+
+/* Optional: fade in/out animation */
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}

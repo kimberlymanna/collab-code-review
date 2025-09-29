@@ -1,0 +1,60 @@
+/* ReviewsList.module.css */
+.reviewCard {
+  @apply bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition;
+}
+
+.reviewHeader {
+  @apply flex justify-between items-start mb-2;
+}
+
+.reviewInfo {
+  @apply text-sm text-gray-500;
+}
+
+.reviewComment {
+  @apply text-gray-700 mb-1;
+}
+
+.reviewDates {
+  @apply text-sm text-gray-400;
+}
+
+.button {
+  @apply px-3 py-1 rounded text-white transition;
+}
+
+.editButton {
+  @apply bg-yellow-400 hover:bg-yellow-500;
+}
+
+.deleteButton {
+  @apply bg-red-400 hover:bg-red-500;
+}
+
+
+.darkForm {
+  background-color: #374151; /* Tailwind gray-700 */
+  color: #f9fafb;
+}
+
+.card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: box-shadow 0.2s;
+  margin-bottom: 1rem;
+}
+
+.card:hover {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+.darkCard {
+  background-color: #374151; /* Tailwind gray-700 */
+  color: #f9fafb;
+}
+
+.highlight {
+  background-color: #facc15; /* Tailwind yellow-400 */
+}

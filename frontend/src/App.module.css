@@ -1,0 +1,20 @@
+/* App.module.css */
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.darkMode {
+  background-color: #1f2937; /* Tailwind gray-900 */
+  color: #f9fafb; /* Tailwind gray-50 */
+  min-height: 100vh;
+}
+
+.undoPopup {
+  @apply fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded shadow-lg flex items-center gap-3;
+}
+
+.undoButton {
+  @apply bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded;
+}
