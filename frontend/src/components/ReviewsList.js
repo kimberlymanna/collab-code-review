@@ -1,5 +1,7 @@
 import React from 'react';
-import styles from '../ReviewsList.module.css';
+import listStyles from '../ReviewsList.module.css';
+import starStyles from '../StarRating.module.css';
+import StarRating from './StarRating';
 
 function ReviewsList({ reviews, onEditReview, onDeleteReview, filterText = "", darkMode }) {
   const highlightMatch = (text) => {
@@ -16,30 +18,30 @@ function ReviewsList({ reviews, onEditReview, onDeleteReview, filterText = "", d
   return (
     <div className="grid gap-4">
       {reviews.map((review) => (
-        <div key={review._id} className={`${styles.card} ${darkMode ? styles.darkCard : ''}`}>
-          <div className={styles.reviewHeader}>
+        <div key={review._id} className={`${listStyles.card} ${darkMode ? listStyles.darkCard : ''}`}>
+          <div className={listStyles.reviewHeader}>
             <div>
-              <strong className={styles.highlight}>{highlightMatch(review.username)}</strong> reviewed <em>{highlightMatch(review.repository)}</em>
+              <strong className={listStyles.highlight}>{highlightMatch(review.username)}</strong> reviewed <em>{highlightMatch(review.repository)}</em>
               {/* <div className={styles.reviewInfo}>Rating: {review.rating}</div> */}
-              <StarRating rating={review.rating} readOnly={true} />
+              <StarRating rating={review.rating} readOnly />
             </div>
             <div className="flex gap-2">
               <button
                 onClick={() => onEditReview(review)}
-                className={`${styles.button} ${styles.editButton}`}
+                className={`${listStyles.button} ${listStyles.editButton}`}
               >
                 Edit
               </button>
               <button
                 onClick={() => onDeleteReview(review._id)}
-                className={`${styles.button} ${styles.deleteButton}`}
+                className={`${listStyles.button} ${listStyles.deleteButton}`}
               >
                 Delete
               </button>
             </div>
           </div>
-          <div className={styles.reviewComment}>{review.comment || "No comment"}</div>
-          <div className={styles.reviewDates}>
+          <div className={listStyles.reviewComment}>{review.comment || "No comment"}</div>
+          <div className={listStyles.reviewDates}>
             Created: {new Date(review.createdAt).toLocaleString()}
             {review.updatedAt && review.updatedAt !== review.createdAt && (
               <span> | Updated: {new Date(review.updatedAt).toLocaleString()}</span>

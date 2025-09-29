@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from '../ReviewForm.module.css';
+import StarRating from "./StarRating";
 
 export default function ReviewForm({ onAddReview, editingReview, setEditingReview, darkMode }) {
   const [username, setUsername] = useState("");
@@ -121,8 +122,8 @@ export default function ReviewForm({ onAddReview, editingReview, setEditingRevie
       </div>
 
       <div>
-        <label className="block mb-1 font-medium">Rating:</label>
-        <StarRating rating={rating} setRating={(val) => setRating(val)} />
+        <label className={styles.inputField}>Rating:</label>
+        <StarRating rating={rating} onRatingChange={setRating} />
         {errors.rating && <p className={styles.errorText}>{errors.rating}</p>}
       </div>
 

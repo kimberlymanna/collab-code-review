@@ -1,0 +1,15 @@
+.starContainer {
+  display: flex;
+  gap: 8px;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.star {
+  color: #d1d5db; /* Tailwind's gray-300 */
+  transition: color 0.2s ease;
+}
+
+.star.filled {
+  color: #fbbf24; /* Tailwind's yellow-400 */
+}
