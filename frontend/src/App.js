@@ -106,7 +106,7 @@ function App() {
 return (
      <div className={`${styles.container} ${darkMode ? styles.darkMode : ''}`}>
       <div className="flex justify-end mb-4">
-        <button onClick={() => setDarkMode(!darkMode)} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+        <button onClick={() => setDarkMode(!darkMode)} className={styles.modeButton}>
           {darkMode ? 'Light Mode' : 'Dark Mode'}
         </button>
       </div>

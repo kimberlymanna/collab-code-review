@@ -121,8 +121,8 @@ export default function ReviewForm({ onAddReview, editingReview, setEditingRevie
         {errors.repository && <p className={styles.errorText}>{errors.repository}</p>}
       </div>
 
-      <div>
-        <label className={styles.inputField}>Rating:</label>
+      <div className={styles.formGroup}>
+        <label className={styles.ratingLabel}>Rating:</label>
         <StarRating rating={rating} onRatingChange={setRating} />
         {errors.rating && <p className={styles.errorText}>{errors.rating}</p>}
       </div>

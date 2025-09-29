@@ -70,3 +70,15 @@
   90% { opacity: 1; transform: translateY(0); }
   100% { opacity: 0; transform: translateY(-10px); }
 }
+
+.formGroup {
+  display: flex;
+  flex-direction: column; /* stack label and stars vertically */
+  gap: 0.5rem; /* space between label, stars, and error */
+  margin-bottom: 1rem; /* space from next form field */
+}
+
+.ratingLabel {
+  font-weight: 500;
+  padding-top: 1rem;
+}
