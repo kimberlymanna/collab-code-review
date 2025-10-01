@@ -13,18 +13,23 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [recentlyDeleted, setRecentlyDeleted] = useState(null);
   const [undoTimeout, setUndoTimeout] = useState(null);
+  const [votes, setVotes] = useState({});
 
-
-  useEffect(() => {
-    setLoading(true);
-    fetch("http://localhost:4000/api/reviews")
-      .then((res) => res.json())
-      .then((data) => {
-        setReviews(data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)))
+useEffect(() => {
+  setLoading(true);
+  fetch("http://localhost:4000/api/reviews")
+    .then((res) => res.json())
+    .then((data) => {
+      if (Array.isArray(data.reviews)) {
+        setReviews(data.reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+      } else {
+        console.error("Expected an array of reviews, got:", data);
+        setReviews([]);
+      }
     })
     .catch((err) => console.error("Fetch error:", err))
     .finally(() => setLoading(false));
-  }, []);
+}, []);
 
   const filteredReviews = useMemo(() => {
     const normalizedFilter = filterText.trim().toLowerCase();
@@ -103,6 +108,21 @@ function App() {
     }
   };
 
+  const handleUpvote = (id) => {
+    setVotes((prev) => ({
+      ...prev,
+      [id]: (prev[id] || 0) + 1,
+    }));
+  };
+
+  const handleDownvote = (id) => {
+    setVotes((prev) => ({
+      ...prev,
+      [id]: (prev[id] || 0) - 1,
+    }));
+  };
+
+
 return (
      <div className={`${styles.container} ${darkMode ? styles.darkMode : ''}`}>
       <div className="flex justify-end mb-4">
@@ -125,7 +145,7 @@ return (
 
       </div>
 
-      {loading ? <SkeletonLoader /> : <ReviewList reviews={filteredReviews} onDeleteReview={handleDeleteReview} onEditReview={handleEditReview} filterText={filterText}/>}
+      {loading ? <SkeletonLoader /> : <ReviewList reviews={filteredReviews} onEditReview={handleEditReview} onDeleteReview={handleDeleteReview} votes={votes} onUpvote={handleUpvote} onDownvote={handleDownvote} darkMode={darkMode}/>}
 
       {recentlyDeleted && (
         <div className={styles.undoPopup}>

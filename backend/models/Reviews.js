@@ -19,6 +19,14 @@ const reviewSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  upvotes: {
+    type: Number,
+    default: 0
+  },
+  downvotes: {
+    type: Number,
+    default: 0
+  }
 }, { timestamps: true });        // <-- adds createdAt and updatedAT automatically
 
 

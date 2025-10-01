@@ -88,4 +88,31 @@ router.delete('/:id', async(req, res) => {
   }
 });
 
+router.patch('/:id/upvote', async (req, res) => {
+  try {
+    const review = await Review.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { upvotes: 1 } },
+      { new: true }
+    );
+    res.json(review);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.patch('/:id/downvote', async (req, res) => {
+  try {
+    const review = await Review.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { downvotes: 1 } },
+      { new: true }
+    );
+    res.json(review);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 module.exports = router;

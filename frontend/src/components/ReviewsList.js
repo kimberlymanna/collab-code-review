@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import listStyles from '../ReviewsList.module.css';
-
 import StarRating from './StarRating';
 
 function ReviewsList({ reviews, onEditReview, onDeleteReview, filterText = "", darkMode }) {
-const [visibleCount, setVisibleCount] = useState(5);
+  const [visibleCount, setVisibleCount] = useState(5);
+  const [votes, setVotes] = useState({}); // { reviewId: voteCount }
 
   const highlightMatch = (text) => {
     if (!filterText) return text;
@@ -17,8 +17,16 @@ const [visibleCount, setVisibleCount] = useState(5);
   if (!reviews) return <p>Loading reviews...</p>;
   if (reviews.length === 0) return <p className="text-center text-gray-500 mt-6">No reviews yet.</p>;
 
+  const handleUpvote = (id) => {
+    setVotes(prev => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
+  };
+
+  const handleDownvote = (id) => {
+    setVotes(prev => ({ ...prev, [id]: (prev[id] || 0) - 1 }));
+  };
+
   const visibleReviews = reviews.slice(0, visibleCount);
-  
+
   return (
     <div className="grid gap-4">
       {visibleReviews.map((review) => (
@@ -43,7 +51,25 @@ const [visibleCount, setVisibleCount] = useState(5);
               </button>
             </div>
           </div>
-          <div className={listStyles.reviewComment}>{review.comment || "No comment"}</div>
+
+          <div className={`${listStyles.reviewComment} ${darkMode ? listStyles.darkCard : ''}`}>{review.comment || "No comment"}</div>
+
+          <div className="flex items-center gap-2 mt-2">
+            <span
+              onClick={() => handleUpvote(review._id)}
+              className="cursor-pointer text-green-500 hover:text-green-600 text-xl select-none"
+            >
+              ▲
+            </span>
+            <span className="text-gray-700 font-medium">{votes[review._id] || 0}</span>
+            <span
+              onClick={() => handleDownvote(review._id)}
+              className="cursor-pointer text-red-500 hover:text-red-600 text-xl select-none"
+            >
+              ▼
+            </span>
+          </div>
+
           <div className={listStyles.reviewDates}>
             Created: {new Date(review.createdAt).toLocaleString()}
             {review.updatedAt && review.updatedAt !== review.createdAt && (
@@ -56,7 +82,7 @@ const [visibleCount, setVisibleCount] = useState(5);
       {visibleCount < reviews.length && (
         <div className="flex justify-center mt-4">
           <button
-            onClick={() => setVisibleCount((prev) => prev + 5)} // load 5 more reviews
+            onClick={() => setVisibleCount((prev) => prev + 5)}
             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
           >
             Load More
