@@ -5,10 +5,23 @@ const Review = require('../models/Reviews.js');
 // Get all reviews
 router.get('/', async(req, res) => {
   try {
-    const reviews = await Review.find();
-    res.json(reviews);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    const reviews = await Review.find()
+      .sort({ createdAt: -1 }) //newest first
+      .skip((page -1) * limit)
+      .limit(limit);
+
+    const total = await Review.countDocuments();
+
+    res.json({
+      reviews,
+      currentPage: page,
+      totalPages: Math.ceil(total / limit)
+    });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ error: "Failed to fetch reviews" });
   }
 });
 
